@@ -15,7 +15,14 @@ import io.quarkus.test.junit.QuarkusTest;
 @TestHTTPEndpoint(SolverService.class)
 @Tag("integration")
 public class SolverIT {
-
+    @Test
+    public void solve_multiply() {
+    expectEquationSolution("4*2","8.0");
+    }
+    @Test
+    public void solve_composed_multiply() {
+    expectEquationSolution("4+2*3","10.0");
+    }
     private static void expectEquationSolution(final String equation, final String body) {
         given().when().get(equation).then().statusCode(200).body(is(body));
     }
